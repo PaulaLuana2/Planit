@@ -14,38 +14,33 @@ public class TaskService {
     @Autowired
     private TaskRepository taskRepository;
 
-    // Criar uma nova tarefa
     public Task createTask(Task task) {
         return taskRepository.save(task);
     }
 
-    // Obter todas as tarefas
     public List<Task> getAllTasks() {
         return taskRepository.findAll();
     }
 
-    // Obter uma tarefa por ID
     public Task getTaskById(Long id) {
         Optional<Task> task = taskRepository.findById(id);
-        return task.orElse(null);  // Retorna null se a tarefa não for encontrada
+        return task.orElse(null); 
     }
 
-    // Atualizar uma tarefa existente
     public Task updateTask(Long id, Task task) {
         if (taskRepository.existsById(id)) {
             task.setId(id);
             return taskRepository.save(task);
         }
-        return null;  // Retorna null se a tarefa não for encontrada
+        return null; 
     }
 
-    // Deletar uma tarefa
     public boolean deleteTask(Long id) {
         if (taskRepository.existsById(id)) {
             taskRepository.deleteById(id);
             return true;
         }
-        return false;  // Retorna false se a tarefa não for encontrada
+        return false;
     }
 }
 

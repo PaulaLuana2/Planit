@@ -16,21 +16,18 @@ public class TaskController {
     @Autowired
     private TaskService taskService;
 
-    // Endpoint para criar uma nova tarefa
     @PostMapping
     public ResponseEntity<Task> createTask(@RequestBody Task task) {
         Task savedTask = taskService.createTask(task);
         return new ResponseEntity<>(savedTask, HttpStatus.CREATED);
     }
 
-    // Endpoint para obter todas as tarefas
     @GetMapping
     public ResponseEntity<List<Task>> getAllTasks() {
         List<Task> tasks = taskService.getAllTasks();
         return new ResponseEntity<>(tasks, HttpStatus.OK);
     }
 
-    // Endpoint para obter uma tarefa por ID
     @GetMapping("/{id}")
     public ResponseEntity<Task> getTaskById(@PathVariable Long id) {
         Task task = taskService.getTaskById(id);
@@ -38,7 +35,6 @@ public class TaskController {
                             : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    // Endpoint para atualizar uma tarefa
     @PutMapping("/{id}")
     public ResponseEntity<Task> updateTask(@PathVariable Long id, @RequestBody Task task) {
         Task updatedTask = taskService.updateTask(id, task);
@@ -46,7 +42,6 @@ public class TaskController {
                                    : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    // Endpoint para deletar uma tarefa
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteTask(@PathVariable Long id) {
         boolean isDeleted = taskService.deleteTask(id);
